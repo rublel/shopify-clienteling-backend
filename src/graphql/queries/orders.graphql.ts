@@ -31,6 +31,10 @@ query getOrders($first: Int!) {
           }
         }
       }
+        pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 }`;

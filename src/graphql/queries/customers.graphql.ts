@@ -37,6 +37,10 @@ export const GET_CUSTOMERS_QUERY = /* GraphQL */ `
           }
         }
       }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 `;
