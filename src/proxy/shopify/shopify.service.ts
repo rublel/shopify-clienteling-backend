@@ -57,6 +57,11 @@ export class ShopifyService {
       }, {}),
     }));
     const pageInfo = data.data[entity].pageInfo;
-    return { records, pageInfo };
+    const totalSize = records?.length;
+    return {
+      totalSize,
+      records,
+      pageInfo,
+    };
   }
 }
