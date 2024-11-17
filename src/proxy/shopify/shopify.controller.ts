@@ -4,11 +4,21 @@ import {
   GET_CUSTOMERS_QUERY,
   GET_ORDERS_QUERY,
   GET_PRODUCTS_QUERY,
+  GET_SHOPS_QUERY,
 } from 'src/graphql';
 
 @Controller('shopify')
 export class ShopifyController {
   constructor(private readonly shopifyService: ShopifyService) {}
+
+  @Get('shops')
+  async getShop() {
+    return this.shopifyService.get({
+      entity: 'shop',
+      query: GET_SHOPS_QUERY,
+      variables: { first: 10 },
+    });
+  }
 
   @Get('products')
   async getProducts() {

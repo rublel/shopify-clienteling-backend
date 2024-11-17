@@ -39,6 +39,7 @@ export class ShopifyService {
     data: any,
     { extraFields } = { extraFields: [] },
   ) {
+    if (!data.data[entity]?.edges) return { record: data.data?.[entity] };
     function cleanEdges(nodeData) {
       if (Array.isArray(nodeData)) {
         return nodeData.map((item) => cleanEdges(item));
@@ -48,7 +49,7 @@ export class ShopifyService {
       }
       return nodeData;
     }
-    const records = cleanEdges(data.data[entity].edges).map((entity) => ({
+    const records = cleanEdges(data.data[entity]?.edges).map((entity) => ({
       ...entity,
       ...extraFields.reduce((acc, field) => {
         acc[field] = cleanEdges(entity[field]?.edges);

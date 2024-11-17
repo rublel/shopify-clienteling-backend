@@ -17,6 +17,7 @@ query getOrders($first: Int!) {
           edges {
             node {
               title
+              name
               quantity
             }
           }
