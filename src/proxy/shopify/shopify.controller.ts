@@ -15,7 +15,7 @@ export class ShopifyController {
     return this.shopifyService.get({
       entity: 'products',
       query: GET_PRODUCTS_QUERY,
-      variables: { first: 1 },
+      variables: { first: 10 },
       extraFields: ['variants', 'media'],
     });
   }
@@ -25,7 +25,7 @@ export class ShopifyController {
     return this.shopifyService.get({
       entity: 'customers',
       query: GET_CUSTOMERS_QUERY,
-      variables: { first: 1 },
+      variables: { first: 10 },
       extraFields: ['orders'],
     });
   }
@@ -35,7 +35,7 @@ export class ShopifyController {
     return this.shopifyService.get({
       entity: 'orders',
       query: GET_ORDERS_QUERY,
-      variables: { first: 1 },
+      variables: { first: 10 },
       extraFields: ['lineItems'],
     });
   }
