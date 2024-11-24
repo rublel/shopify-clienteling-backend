@@ -7,10 +7,28 @@ dotenv.config();
 
 @Injectable()
 export class ShopifyService {
-  private readonly shopifyUrl = process.env.SHOPIFY_DEMO_HOST_URL;
+  private readonly shopifyUrl = process.env.SHOPIFY_APP_URL;
   private readonly accessToken = process.env.SHOPIFY_DEMO_ACCESS_TOKEN;
 
   constructor(private httpService: HttpService) {}
+
+  async getAccessToken(code: string) {
+    try {
+      const response = this.httpService.post(
+        `https://balink-demo-shop.myshopify.com/admin/oauth/access_token`,
+        {
+          client_id: process.env.SHOPIFY_APP_CLIENT_ID,
+          client_secret: process.env.SHOPIFY_APP_CLIENT_SECRET,
+          code,
+        },
+      );
+      const { data } = await lastValueFrom(response);
+      return data;
+    } catch (error) {
+      console.error('Error fetching access token:', error);
+      throw error;
+    }
+  }
 
   async get({ entity, query, variables, extraFields = [] }) {
     try {

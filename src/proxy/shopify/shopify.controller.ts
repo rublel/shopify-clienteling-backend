@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ShopifyService } from './shopify.service';
 import {
   GET_CUSTOMERS_QUERY,
@@ -10,6 +10,11 @@ import {
 @Controller('shopify')
 export class ShopifyController {
   constructor(private readonly shopifyService: ShopifyService) {}
+
+  @Post('/oauth/access_token')
+  async getShopifyAccessToken(@Body() body: { code: string }) {
+    return this.shopifyService.getAccessToken(body.code);
+  }
 
   @Get('shops')
   async getShop() {
