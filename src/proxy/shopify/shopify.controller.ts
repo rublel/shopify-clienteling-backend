@@ -13,8 +13,11 @@ export class ShopifyController {
   constructor(private readonly shopifyService: ShopifyService) {}
 
   @Get('/oauth/access_token')
-  async getShopifyAccessToken(@Query() { code }: any, @Res() res: Response) {
-    await this.shopifyService.getAccessToken(code);
+  async getShopifyAccessToken(
+    @Query() { code, shop }: any,
+    @Res() res: Response,
+  ) {
+    await this.shopifyService.getAccessToken(code, shop);
     res.redirect(
       `https://shopify-clienteling-frontent.vercel.app/apps/${process.env.SHOPIFY_APP_CLIENT_ID}/`,
     );

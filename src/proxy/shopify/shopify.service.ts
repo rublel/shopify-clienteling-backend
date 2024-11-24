@@ -12,10 +12,10 @@ export class ShopifyService {
 
   constructor(private httpService: HttpService) {}
 
-  async getAccessToken(code: string) {
+  async getAccessToken(code: string, shop: string) {
     try {
       const response = this.httpService.post(
-        `https://balink-demo-shop.myshopify.com/admin/oauth/access_token`,
+        `https://${shop}.myshopify.com/admin/oauth/access_token`,
         {
           client_id: process.env.SHOPIFY_APP_CLIENT_ID,
           client_secret: process.env.SHOPIFY_APP_CLIENT_SECRET,
