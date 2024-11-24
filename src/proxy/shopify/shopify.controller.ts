@@ -16,7 +16,7 @@ export class ShopifyController {
   async getShopifyAccessToken(@Query() { code }: any, @Res() res: Response) {
     await this.shopifyService.getAccessToken(code);
     res.redirect(
-      `https://${process.env.SHOPIFY_APP_URL}/apps/${process.env.SHOPIFY_APP_CLIENT_ID}/`,
+      `https://shopify-clienteling-frontent.vercel.app/apps/${process.env.SHOPIFY_APP_CLIENT_ID}/`,
     );
   }
 
