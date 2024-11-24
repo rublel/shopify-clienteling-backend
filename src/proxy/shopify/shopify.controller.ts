@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Query, Res } from '@nestjs/common';
 import { ShopifyService } from './shopify.service';
 import {
   GET_CUSTOMERS_QUERY,
@@ -6,14 +6,18 @@ import {
   GET_PRODUCTS_QUERY,
   GET_SHOPS_QUERY,
 } from 'src/graphql';
+import { Response } from 'express';
 
 @Controller('shopify')
 export class ShopifyController {
   constructor(private readonly shopifyService: ShopifyService) {}
 
-  @Post('/oauth/access_token')
-  async getShopifyAccessToken(@Body() body: { code: string }) {
-    return this.shopifyService.getAccessToken(body.code);
+  @Get('/oauth/access_token')
+  async getShopifyAccessToken(@Query() { code }: any, @Res() res: Response) {
+    const response = await this.shopifyService.getAccessToken(code);
+    res.redirect(
+      `https://shopify-clienteling-frontent.vercel.app/?access_token=${response.access_token}`,
+    );
   }
 
   @Get('shops')
