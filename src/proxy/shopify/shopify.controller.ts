@@ -14,9 +14,9 @@ export class ShopifyController {
 
   @Get('/oauth/access_token')
   async getShopifyAccessToken(@Query() { code }: any, @Res() res: Response) {
-    const response = await this.shopifyService.getAccessToken(code);
+    await this.shopifyService.getAccessToken(code);
     res.redirect(
-      `https://shopify-clienteling-frontent.vercel.app/?access_token=${response.access_token}`,
+      `https://${process.env.SHOPIFY_APP_URL}/apps/${process.env.SHOPIFY_APP_CLIENT_ID}/`,
     );
   }
 
