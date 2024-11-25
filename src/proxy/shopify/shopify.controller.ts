@@ -20,7 +20,7 @@ export class ShopifyController {
     const response = await this.shopifyService.getAccessToken(code, shop);
     const base64DecodedHost = Buffer.from(host, 'base64').toString('utf-8');
     res.redirect(
-      `${base64DecodedHost}/apps/growing-deal-app-9?data=${response.access_token}`,
+      `https://${base64DecodedHost}/apps/growing-deal-app-9?data=${response.access_token}`,
     );
   }
 
