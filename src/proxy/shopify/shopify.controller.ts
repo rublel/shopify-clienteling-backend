@@ -19,8 +19,8 @@ export class ShopifyController {
   ) {
     const response = await this.shopifyService.getAccessToken(code, shop);
     const base64DecodedHost = Buffer.from(host, 'base64').toString('utf-8');
-    res.redirect(
-      `https://shopify-clienteling-frontent.vercel.app/?accessToken=${response.access_token}&shop=${shop}&host=${base64DecodedHost}`,
+    return res.redirect(
+      `https://${base64DecodedHost}/apps/${process.env.SHOPIFY_APP_CLIENT_ID}?data=${response.access_token}`,
     );
   }
 
