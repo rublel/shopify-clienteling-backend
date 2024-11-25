@@ -14,12 +14,13 @@ export class ShopifyController {
 
   @Get('/oauth/access_token')
   async getShopifyAccessToken(
-    @Query() { code, shop }: any,
+    @Query() { code, shop, host }: any,
     @Res() res: Response,
   ) {
     const response = await this.shopifyService.getAccessToken(code, shop);
+    const base64DecodedHost = Buffer.from(host, 'base64').toString('utf-8');
     res.redirect(
-      `https://shopify-clienteling-frontent.vercel.app/apps/${process.env.SHOPIFY_APP_CLIENT_ID}/${response.access_token}/${shop}`,
+      `${base64DecodedHost}/apps/growing-deal-app-9?data=${response.access_token}`,
     );
   }
 
