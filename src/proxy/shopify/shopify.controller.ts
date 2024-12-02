@@ -18,10 +18,9 @@ export class ShopifyController {
     @Res() res: Response,
   ) {
     const response = await this.shopifyService.getAccessToken(code, shop);
-    // res.redirect(
-    //   `https://shopify-clienteling-frontent-git-main-digital-web-concept.vercel.app?access_token=${response.access_token}&shop=${shop}`,
-    // );
-    return response;
+    res.redirect(
+      `https://shopify-clienteling-frontent-git-main-digital-web-concept.vercel.app?access_token=${response.access_token}&shop=${shop}`,
+    );
   }
 
   @Get('shops')
