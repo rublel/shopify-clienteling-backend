@@ -19,7 +19,7 @@ export class ShopifyController {
   ) {
     const response = await this.shopifyService.getAccessToken(code, shop);
     res.redirect(
-      `https://admin.shopify.com/store/balink-demo-shop/apps/growing-deal-app-9/${response.access_token}`,
+      `https://shopify-clienteling-frontent-git-main-digital-web-concept.vercel.app/${response.access_token}`,
     );
   }
 
