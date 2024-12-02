@@ -21,7 +21,7 @@ export class ShopifyService {
           client_secret: process.env.SHOPIFY_APP_CLIENT_SECRET,
           code,
           scope:
-            'write_products,write_customers,write_orders,read_products,read_customers,read_orders',
+            'read_content,read_files,read_products,write_content,write_files,write_products',
         },
       );
       const { data } = await lastValueFrom(response);
