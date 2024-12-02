@@ -13,13 +13,15 @@ export class ShopifyService {
   constructor(private httpService: HttpService) {}
 
   async getAccessToken(code: string, shop: string) {
-    https: try {
+    try {
       const response = this.httpService.post(
         `https://${shop}/admin/oauth/access_token`,
         {
           client_id: process.env.SHOPIFY_APP_CLIENT_ID,
           client_secret: process.env.SHOPIFY_APP_CLIENT_SECRET,
           code,
+          scope:
+            'write_products,write_customers,write_orders,read_products,read_customers,read_orders',
         },
       );
       const { data } = await lastValueFrom(response);
