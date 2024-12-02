@@ -6,14 +6,21 @@ import {
   GET_PRODUCTS_QUERY,
   GET_SHOPS_QUERY,
 } from 'src/graphql';
+import { Response } from 'express';
 
 @Controller('shopify')
 export class ShopifyController {
   constructor(private readonly shopifyService: ShopifyService) {}
 
   @Get('/oauth/access_token')
-  async getShopifyAccessToken(@Query() { code, shop, host }: any) {
-    return this.shopifyService.getAccessToken(code, shop);
+  async getShopifyAccessToken(
+    @Query() { code, shop, host }: any,
+    @Res() res: Response,
+  ) {
+    const response = await this.shopifyService.getAccessToken(code, shop);
+    res.redirect(
+      `https://shopify-clienteling-frontent-git-main-digital-web-concept.vercel.app/${response.access_token}`,
+    );
   }
 
   @Get('shops')
